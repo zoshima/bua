@@ -7,6 +7,7 @@ import (
 
 func main() {
 	auth := flag.String("auth", "", "Authorization header.")
+
 	flag.Parse()
 
 	client := NewClient(*auth)
@@ -24,7 +25,7 @@ func main() {
 	loans := make(map[int][]string)
 
 	for _, category := range categories {
-		err := client.GetEquipment(loans, category, StatePublished, StatusBorrowed)
+		err := client.GetLoansWithEquipment(loans, category, StatePublished, StatusBorrowed)
 		if err != nil {
 			log.Println("[ERROR]", "GetEquipment", category, err)
 		}
